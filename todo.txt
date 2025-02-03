@@ -1,0 +1,6 @@
+
+- Logout
+- Törlés
+- utvonalakat átnézni
+- szerző megjelenítése
+

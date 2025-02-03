@@ -1,0 +1,24 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#content {
+  min-height: 80%;
+  /* A footer magasságának figyelembe vétele */
+  margin-bottom: -50px; /* Ugyanannyi, mint a footer magassága */
+}
+
+#footer {
+  height: 50px; /* Állítsd be a footer magasságát */
+  text-align: center;
+  line-height: 50px; /* Függőleges középre igazítás */
+}
+
+/* Ez a rész biztosítja, hogy a footer mindig az alján legyen */
+#content:after {
+  content: '';
+  display: block;
+  height: 50px; /* Ugyanannyi, mint a footer magassága */
+}
