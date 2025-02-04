@@ -2,7 +2,7 @@
 session_start();
 require 'header.php';
 require 'db_connection.php';
-require_once 'functions.php';
+
 
 if (!isLoggedIn()) {
     header('Location: login.php');
@@ -45,8 +45,10 @@ if (isset($_GET['id'])) {
     exit;
 }
 ?>
-<div class="container h-100 w-50">
-    <h3>Edit Post</h3>
+
+
+<div class="container col-12 col-md-6">
+<h3 class="mb-4 text-center">Edit Post</h3>
     <!--Hibák megjelenítése-->
     <?php showErrors(); ?>
     <!-- crate post form -->
@@ -61,7 +63,11 @@ if (isset($_GET['id'])) {
             <label for="body" class="form-label">Body</label>
             <textarea class="form-control" id="body" name="body" rows="5"><?php echo $post['body']; ?></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Frissít</button>
+        <div class="d-flex justify-content-evenly">
+            <button type="submit" class="btn btn-primary">Frissít</button>
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='my-posts.php'">Mégse</button>
+        </div>
+        
     </form>
 </div>
     

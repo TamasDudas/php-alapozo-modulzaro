@@ -3,18 +3,18 @@
 session_start();
 require 'header.php';
 require 'db_connection.php';
-require_once 'functions.php';
+
 
 if (isset($_SESSION['error_message'])) {
     echo '<div class=" container alert alert-danger">' . $_SESSION['error_message'] . '</div>';
     unset($_SESSION['error_message']); // Üzenet törlése, hogy ne jelenjen meg újra
 }
 
-// Check if the user is logged in
+// Megnézzük, hogy be van-e lépve a felhasználó
 if (isLoggedIn() && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 
-    // Check if the user is an admin
+    // Megnézzük, hogy admin-e a felhasználó
     $stmt = $conn->prepare("SELECT is_admin FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
@@ -27,7 +27,7 @@ if (isLoggedIn() && isset($_SESSION['user_id'])) {
 
         $stmt = getPostAndName($conn);
     } else {
-        // Regular user can see only their posts
+        // A sima felhasználó a saját posztjait láthatja
         $stmt = $conn->prepare("SELECT posts.*, users.nev FROM posts JOIN users ON posts.user_id = users.id WHERE posts.user_id = ?");
         $stmt->bind_param("i", $user_id);
     }
@@ -54,7 +54,7 @@ if (isLoggedIn() && isset($_SESSION['user_id'])) {
             echo "<div class='container mt-4'>";
             echo "<a href='edit-post.php?id=" . $post['id'] . "' class='btn btn-primary me-2'>Szerkesztés</a>";
             // Delete gomb
-            echo "<a href='delete-post.php?id=" . $post['id'] . "' class='btn btn-danger'>Törlés</a>";
+            echo "<a href='delete-post.php?id=" . $post['id'] . "' class='btn btn-danger' onclick='return confirmDelete()'>Törlés</a>";
             echo "</div>";
             echo "<hr>";
         }

@@ -12,10 +12,10 @@ $bodyValue = isset($_SESSION['form_data']['body']) ? htmlspecialchars($_SESSION[
 ?>   
   <div class="container h-100">
       
-      <!-- create post form -->
-      <!-- <div class="row justify-content-center">
+      <!-- Poszt létrehozása form -->
+       <div class="row justify-content-center">
           <div class="col-12 col-md-6">
-            <h3>Írj valamit!</h3> -->
+            
       <!--Hibák megjelenítése-->
       <?php showErrors(); ?>
       

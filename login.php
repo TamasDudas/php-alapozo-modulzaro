@@ -3,16 +3,14 @@ session_start();
 require 'header.php';
 require_once 'functions.php';
 
-// $errors = isErrors();
-?>
 
-<div class="container h-100 w-50">
-    <h3>Bejelentkezés</h3>
-</div>
+?>
 
 
 <!-- Bootsrap login form -->
-<div class="container w-50">
+<div class="container col-12 col-md-6">
+<h3 class="mb-4 text-center">Bejelentkezés</h3>
+
   <!-- Ha sikeres volt a regisztráció -->
 <?php if (isset($_SESSION['success'])): ?>
             <div class="alert alert-success">

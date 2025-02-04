@@ -2,9 +2,7 @@
 
 session_start();
 
-// Adatbázis kapcsolódás
-// $db = new PDO('mysql:host=localhost;dbname=your_database', 'username', 'password');
-// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 require 'db_connection.php';
 
 

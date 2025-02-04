@@ -6,19 +6,21 @@ body {
 
 #content {
   min-height: 80%;
-  /* A footer magasságának figyelembe vétele */
-  margin-bottom: -50px; /* Ugyanannyi, mint a footer magassága */
+
+  margin-bottom: -50px;
 }
 
 #footer {
-  height: 50px; /* Állítsd be a footer magasságát */
+  height: 50px;
   text-align: center;
-  line-height: 50px; /* Függőleges középre igazítás */
+  line-height: 50px;
 }
 
-/* Ez a rész biztosítja, hogy a footer mindig az alján legyen */
 #content:after {
   content: '';
   display: block;
-  height: 50px; /* Ugyanannyi, mint a footer magassága */
+  height: 50px;
+}
+.nav-link:active {
+  color: black !important;
 }

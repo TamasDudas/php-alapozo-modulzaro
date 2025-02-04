@@ -16,14 +16,11 @@ if (isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $post = $result->fetch_assoc();
-        echo "<div class='container mt-5'>
-                <h2 class='mb-4'>{$post['title']}</h2>
-                <p>{$post['body']}</p>
-                <p class='card-text text-start mt-3 text-primary-emphasis'>Szerző: {$post['nev']}</p>
-              </div>";
+        echo renderPost($post['title'], $post['body'], $post['nev'], $post_id);
     } else {
         echo "<div class='container mt-5'><p>Nincs ilyen poszt.</p></div>";
     }
+
 
     $stmt->close();
 } else {

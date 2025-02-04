@@ -1,7 +1,9 @@
 <?php
 
+
 require 'db_connection.php';
 require_once 'functions.php';
+
 
 //Postok és hozzá tartozó user nevének lekérdezése
 $stmt = getPostAndName($conn);
@@ -9,10 +11,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 
-// $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-// var_dump("<pre>", $rows, "</pre>");
-// die();
 //Eredmények kiíratása bootsrap card osztályokkal
 if ($result->num_rows > 0) {
     echo "<div class='container mt-4'><div class='row'>";
@@ -26,7 +24,7 @@ if ($result->num_rows > 0) {
                     <h5 class='card-title'>{$row['title']}</h5>
                     <p class='card-text'>" . $excerpt . "</p>
                     <a href='post.php?id={$row['id']}' class='btn btn-warning w-50 m-auto'>Tovább a posztra</a>
-                    <p class='card-text text-start mt-3 text-primary-emphasis'>Szerző: {$row['nev']}</p>
+                    <a class='card-text text-start mt-3 text-primary-emphasis' href='author-posts.php?id={$row['id']}'>Szerző: {$row['nev']}</a>
                 </div>
             </div>
         </div>";
