@@ -9,7 +9,7 @@
 
 ### Szerzők:
 
-- **Email:** roxi@example.com
+- **Email:** roxika@example.com
   - **Jelszó:** roxi123
 - **Email:** gabor@example.com
   - **Jelszó:** gabor123

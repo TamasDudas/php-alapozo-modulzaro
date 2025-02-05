@@ -21,33 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Ellenőrizzük, hogy a felhasználó admin-e
-    $stmt = $conn->prepare("SELECT is_admin FROM users WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($is_admin);
-    $stmt->fetch();
-    $stmt->close();
-
-    if ($is_admin) {
-        // Admin bármelyik posztot frissítheti
-        $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
-        $stmt->bind_param("i", $id);
-    } else {
-        // Normál felhasználó csak a saját posztját frissítheti
-        $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
-        $stmt->bind_param("ii", $id, $user_id);
-    }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $post = $result->fetch_assoc();
-
-    if (!$post) {
-        $_SESSION['error_message'] = 'Nincs jogosultságod a poszt frissítésére.';
-        header('Location: my-posts.php');
-        exit;
-    }
+    $post = getEditPost($conn, $id, $user_id);
 
     // Ha a poszt a felhasználóhoz tartozik, vagy admin, frissítjük
     $stmt = $conn->prepare("UPDATE posts SET title = ?, body = ? WHERE id = ?");

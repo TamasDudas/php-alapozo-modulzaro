@@ -12,34 +12,8 @@ if (!isLoggedIn()) {
 if (isset($_GET['id'])) {
     $post_id = $_GET['id'];
     $user_id = $_SESSION['user_id'];
-
     // Ellenőrizzük, hogy a felhasználó admin-e
-    $stmt = $conn->prepare("SELECT is_admin FROM users WHERE id = ?");
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $stmt->bind_result($is_admin);
-    $stmt->fetch();
-    $stmt->close();
-
-    if ($is_admin) {
-        // Admin bármelyik posztot szerkesztheti
-        $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ?");
-        $stmt->bind_param("i", $post_id);
-    } else {
-        // Normál felhasználó csak a saját posztját szerkesztheti
-        $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
-        $stmt->bind_param("ii", $post_id, $user_id);
-    }
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $post = $result->fetch_assoc();
-
-    if (!$post) {
-        $_SESSION['error_message'] = 'Nincs jogosultságod a poszt szerkesztésére.';
-        header('Location: my-posts.php');
-        exit;
-    }
+    $post = getEditPost($conn, $post_id, $user_id);
 } else {
     header('Location: my-posts.php');
     exit;
